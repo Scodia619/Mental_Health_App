@@ -23,6 +23,16 @@ app.post("/createUser", async (req, res) => {
   }
 })
 
+app.post("/addTopic", async (req, res) => {
+  const { topic_name } = req.body
+  try{
+    const topic = await userService.addTopic(topic_name)
+    res.json({message: "Topic Created", topic})
+  }catch(err){
+    res.status(500).json({message: err.message})
+  }
+})
+
 app.listen(PORT, () => {
   console.log(`Listening on Port ${PORT}`)
 })
